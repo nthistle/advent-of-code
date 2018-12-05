@@ -13,4 +13,4 @@ def react(poly):
 
 poly = react(inp)
 print("Part 1:",len(poly))
-print("Part 2:",min(len(react(inp.replace(c,"").replace(c.upper(),""))) for c in set(poly.lower())))
+print("Part 2:",min(len(react(poly.replace(c,"").replace(c.upper(),""))) for c in set(poly.lower())))
