@@ -20,7 +20,6 @@ def gen_dist(loc, radius):
     return [d for d in set(dist) if in_range(d)]
     
 for i, co in enumerate(coords):
-    print(i)
     for r in range(800):
         for c in gen_dist(co, r):
             if r < region[c[0]][c[1]][0]:
@@ -29,7 +28,6 @@ for i, co in enumerate(coords):
                 region[c[0]][c[1]] = (r, None)
 
 for i in range(400):
-    print(i)
     if region[i][0][1] in valid:
         valid.remove(region[i][0][1])
     if region[i][399][1] in valid:
@@ -42,7 +40,6 @@ for i in range(400):
 counters = {v:0 for v in valid}
 
 for i in range(400):
-    print(i)
     for j in range(400):
         if region[i][j][1] in counters:
             counters[region[i][j][1]] += 1
@@ -52,7 +49,6 @@ print("Part 1:",max(counters.values()))
 region = [[0 for i in range(400)] for j in range(400)]
 
 for i, co in enumerate(coords):
-    print(i)
     for r in range(800):
         for c in gen_dist(co, r):
             region[c[0]][c[1]] += r
