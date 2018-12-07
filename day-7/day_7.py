@@ -1,6 +1,8 @@
 with open("input.txt") as file:
     inp = file.read().strip()
 
+# both of these solutions are poor, but were fast to write
+# and are good enough for the given test case
 steps = [(line[5],line[36]) for line in inp.split("\n")]
 step_dict = {}
 for step in steps:
@@ -10,6 +12,7 @@ for step in steps:
         step_dict[step[1]] = [step[0]]
     if step[0] not in step_dict:
         step_dict[step[0]] = []
+step_dict_orig = {k:step_dict[k].copy() for k in step_dict}
         
 order = ""
 while len(order) < 26:
@@ -29,19 +32,12 @@ print("Part 1:",order)
 
 import random
 
-step_dict = {}
-for step in steps:
-    if step[1] in step_dict:
-        step_dict[step[1]].append(step[0])
-    else:
-        step_dict[step[1]] = [step[0]]
-    if step[0] not in step_dict:
-        step_dict[step[0]] = []
+step_dict = step_dict_orig
 
+# this method isn't guaranteed to work, but it's easier to write
 current_time = 0
 cur_working = [] # (letter, time_fin)
 while len(step_dict) > 0:
-    print(cur_working)
     i = 0
     while i < len(cur_working):
         work = cur_working[i]
@@ -62,5 +58,5 @@ while len(step_dict) > 0:
         step_dict.pop(d)
     current_time = min(cur_working, key=lambda v:v[1])[1]
 
-print(max(cur_working, key=lambda v:v[1])[1])
+print("Part 2:",max(cur_working, key=lambda v:v[1])[1])
 
