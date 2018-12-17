@@ -9,7 +9,7 @@ dat = [list(sorted(ln.replace(",","").split(" "))) for ln in inp.split("\n")]
 dat = [[x[2:].split("..") if ".." in x else [x[2:]] for x in pt] for pt in dat]
 dat = [[[int(c) for c in x] for x in pt] for pt in dat]
 min_x = min(d[0][0] for d in dat)
-max_x = max(d[0][-1] for d in dat)
+max_x = max(d[0][-1] for d in dat) + 2
 min_y = min(d[1][0] for d in dat)
 max_y = max(d[1][-1] for d in dat)
 
