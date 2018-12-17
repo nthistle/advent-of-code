@@ -1,7 +1,6 @@
 import queue
 
 with open("input.txt") as file:
-#with open("samp5.txt") as file:
     inp = file.read().strip()
 
 mat = [[[c] for c in line] for line in inp.split("\n")]
@@ -70,7 +69,6 @@ def simulate_combat(mat, elf_sc=False, elf_power=3):
                                 seen.add((c[0]+d2[0],c[1]+d2[1]))
                                 q.put((c[0]+d2[0],c[1]+d2[1],c[2]+1))
 
-                #print("My best step is",best_step)
                 if best_step == None:
                     ## If we're trapped and not adjacent to an enemy
                     ## already, we can't attack, so we're done
@@ -99,22 +97,17 @@ def simulate_combat(mat, elf_sc=False, elf_power=3):
                         return False
                     alive_units.remove(lowest)
                     mat[lowest[1]][lowest[2]] = ["."]
-                    
-        #alive_units.sort(key = lambda u : 10000 * u[1] + u[2])
-        #print("\n".join("".join(c[0] for c in line) + " " + " ".join(str(un) \
-        #            for un in alive_units if un[1] == i) for i,line in enumerate(mat)))
-        #print()
         rd += 1
     return (rd - 1) * sum(u[3] for u in alive_units)
 
 print("Part 1:", simulate_combat(mat_copy()))
 low = 3
-high = 30
+high = 50
 while high > low:
-    print(low,high)
     mid = (high+low)//2
     if simulate_combat(mat_copy(), True, mid):
         high = mid
     else:
         low = mid + 1
-#print("Part 1:",(rd-1)*sum(u[3] for u in alive_units))
+
+print("Part 2:", simulate_combat(mat_copy(), elf_power=low))
