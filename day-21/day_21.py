@@ -86,13 +86,35 @@ ip = 0
 ip_reg = prog[0][1]
 prog = prog[1:]
 ctr = 0
+flag = False
+check_seq = []
+cc = 0
 while ip in range(len(prog)):
     reg[ip_reg] = ip
     if ip == 28:
         print("Part 1:",reg[2])
         break
-        check_seq.append(reg[2])
     op_dict[prog[ip][0]](reg, *prog[ip][1:])
     ip = reg[ip_reg]
     ip += 1
     ctr += 1
+
+seen_checks = set()
+last_check = 0
+r2, r3, r5 = 2208870, 0, 65536
+while True:
+    if r5 < 256:
+        if r2 in seen_checks:
+            print("Part 2:",last_check)
+            break
+        seen_checks.add(r2)
+        last_check = r2
+        r5 = r2 | 65536
+        r2 = 2238642
+    else:
+        r5 //= 256
+    r3 = r5 & 255
+    r2 += r3
+    r2 &= 16777215
+    r2 *= 65899
+    r2 &= 16777215
