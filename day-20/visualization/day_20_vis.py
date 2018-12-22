@@ -1,6 +1,5 @@
 import sys
 import numpy as np
-from PIL import Image
 import cv2
 
 from colorsys import hls_to_rgb
@@ -40,7 +39,8 @@ def update_frame():
     global fc
     fc += 1
     if fc % 100 == 0:
-        print(fc)
+        ## Not 'real' frames, since only every 5th virtual frame is painted
+        print(f"Frame #{fc}")
     if fc % 5 == 0:
         clip_writer.write(im)
 
@@ -108,18 +108,12 @@ def dfs(co, pto):
             stack.append((cloc,pt[bf:]))
 
 
-def vis(n):
-    print("\n".join("".join(c[1000-n:1000+n]) for c in mp[1000-n:1000+n]))
-
 mp[1000][1000] = "X"
-
 dfs((1000,1000), path)
-print("DFS done")
 
 for i in range(30):
     update_frame()
 
-#now find farthest
 cur = (1000,1000)
 import queue
 q = queue.Queue()
@@ -159,6 +153,3 @@ for i in range(60):
     update_frame()
 
 clip_writer.release()
-
-print("Part 1:",furthest)
-print("Part 2:",far_count)
