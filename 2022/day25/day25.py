@@ -31,11 +31,11 @@ while ans:
     b5.append(ans % 5)
     ans //= 5
 
-b5.reverse()
+b5 = [0] + b5[::-1]
 while any(n >= 3 for n in b5):
     for i in range(len(b5)):
         if b5[i] >= 3:
             b5[i-1] += 1
             b5[i] -= 5
-print("".join(["0","1","2","=","-"][n] for n in b5))
+print("".join(["0","1","2","=","-"][n] for n in b5).lstrip("0"))
 print("click the button")
